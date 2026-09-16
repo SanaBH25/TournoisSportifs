@@ -2,6 +2,7 @@ package com.example.tournoissportifs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -34,5 +35,9 @@ public class ChoixEquipeActivity extends AppCompatActivity {
             intent.putExtra(ConnexionActivity.EXTRA_USAGER_ID, usagerId);
             startActivity(intent);
         });
+    }
+
+    public void onquitte(View view) {
+        finish();
     }
 }
