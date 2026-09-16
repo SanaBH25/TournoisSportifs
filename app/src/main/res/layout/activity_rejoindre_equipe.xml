@@ -3,18 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="20dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="Choisissez une équipe à rejoindre"
-        android:textSize="18sp"
-        android:layout_marginBottom="16dp" />
+        android:textSize="20sp" />
 
     <ListView
         android:id="@+id/lvEquipes"
+        android:layout_width="355dp"
+        android:layout_height="478dp" />
+
+    <Button
+        android:id="@+id/button2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:onClick="onretour"
+        android:text="Retour" />
 
 </LinearLayout>

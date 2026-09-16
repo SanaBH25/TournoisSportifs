@@ -1,6 +1,7 @@
 package com.example.tournoissportifs;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -55,6 +56,10 @@ public class RejoindreEquipeActivity extends AppCompatActivity {
 
         membreEquipeAdapter.inserer(usagerId, idEquipe, "Joueur");
         Toast.makeText(this, "Équipe " + equipe.getNom() + " rejointe !", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    public void onretour(View view) {
         finish();
     }
 }

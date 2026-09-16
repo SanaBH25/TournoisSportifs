@@ -21,7 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
             + COL_ID_USAGER + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_PRENOM_USAGER + " TEXT, "
             + COL_NOM_USAGER + " TEXT, "
-            + COL_EMAIL_USAGER + " TEXT "
+            + COL_EMAIL_USAGER + " TEXT, "
             + COL_MOT_DE_PASSE_USAGER + " TEXT NOT NULL"
             + ")";
     public static final String TABLE_EQUIPES =  "Equipes";
