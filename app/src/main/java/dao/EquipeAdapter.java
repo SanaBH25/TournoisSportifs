@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import modele.Equipe;
-import modele.Usager;
 
 public class EquipeAdapter {
     private DbHelper helper;
@@ -21,14 +20,15 @@ public class EquipeAdapter {
     public void openBD(){ db = helper.getWritableDatabase();}
     public void closeBD(){db.close();}
 
-    public void inserer (Equipe equipe){
+    public long inserer (Equipe equipe){
         openBD();
         ContentValues cv = new ContentValues();
         cv.put(DbHelper.COL_NOM_EQUIPE, equipe.getNom());
         cv.put(DbHelper.COL_SPORT, equipe.getSport());
 
-        db.insert(DbHelper.TABLE_EQUIPES,null,cv);
+        long id = db.insert(DbHelper.TABLE_EQUIPES,null,cv);
         closeBD();
+        return id;
     }
 
     public ArrayList<Equipe> lister (){
