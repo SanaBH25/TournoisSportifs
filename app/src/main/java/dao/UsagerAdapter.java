@@ -32,6 +32,31 @@ public class UsagerAdapter {
         closeBD();
     }
 
+    public Usager getParEmail(String email) {
+        openBD();
+        String[] cols = {
+                DbHelper.COL_ID_USAGER, DbHelper.COL_PRENOM_USAGER, DbHelper.COL_NOM_USAGER,
+                DbHelper.COL_EMAIL_USAGER, DbHelper.COL_MOT_DE_PASSE_USAGER
+        };
+        Usager usager = null;
+
+        Cursor curseur = db.query(DbHelper.TABLE_USAGERS, cols,
+                DbHelper.COL_EMAIL_USAGER + " = ?", new String[]{email},
+                null, null, null);
+        if (curseur.moveToFirst()) {
+            usager = new Usager(null,
+                    curseur.getString(3),
+                    curseur.getString(0),
+                    null,
+                    curseur.getString(4),
+                    curseur.getString(2),
+                    curseur.getString(1));
+        }
+        curseur.close();
+        closeBD();
+        return usager;
+    }
+
     public ArrayList<Usager> lister() {
         openBD();
         String[] cols = {

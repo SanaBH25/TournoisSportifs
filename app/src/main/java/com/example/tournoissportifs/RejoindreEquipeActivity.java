@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+import dao.EquipeAdapter;
 import dao.MembreEquipeAdapter;
 import modele.Equipe;
 
