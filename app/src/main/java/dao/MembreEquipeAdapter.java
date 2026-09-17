@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import modele.MembreEquipe;
+import modele.ParticipantEquipe;
 
 public class MembreEquipeAdapter {
     private DbHelper helper;
@@ -49,7 +50,12 @@ public class MembreEquipeAdapter {
         return existe;
     }
 
-    public ArrayList<MembreEquipe> listerParEquipe(long idEquipe) {
+    /**
+     * Liste les personnes membres d'une équipe donnée (nom de l'USAGER + son rôle).
+     * Ne pas confondre avec modele.MembreEquipe, qui représente "une équipe à laquelle
+     * un usager appartient" (nom = nom de l'équipe) — concept différent.
+     */
+    public ArrayList<ParticipantEquipe> listerParEquipe(long idEquipe) {
         openBD();
         String sql = "SELECT u." + DbHelper.COL_NOM_USAGER + ", m." + DbHelper.COL_ROLE
                 + ", m." + DbHelper.COL_ID_TEAM
@@ -58,16 +64,41 @@ public class MembreEquipeAdapter {
                 + " = u." + DbHelper.COL_ID_USAGER
                 + " WHERE m." + DbHelper.COL_ID_TEAM + " = ?";
 
-        ArrayList<MembreEquipe> resultats = new ArrayList<>();
+        ArrayList<ParticipantEquipe> resultats = new ArrayList<>();
         Cursor curseur = db.rawQuery(sql, new String[]{String.valueOf(idEquipe)});
         curseur.moveToFirst();
         while (!curseur.isAfterLast()) {
-            MembreEquipe m = new MembreEquipe(
+            ParticipantEquipe p = new ParticipantEquipe(
                     curseur.getString(0),
                     curseur.getString(1),
-                    null,
                     curseur.getString(2));
-            resultats.add(m);
+            resultats.add(p);
+            curseur.moveToNext();
+        }
+        curseur.close();
+        closeBD();
+        return resultats;
+    }
+
+    public ArrayList<MembreEquipe> listerParUsager(long idUsager) {
+        openBD();
+        String sql = "SELECT e." + DbHelper.COL_ID_EQUIPE + ", e." + DbHelper.COL_NOM_EQUIPE
+                + ", e." + DbHelper.COL_SPORT + ", m." + DbHelper.COL_ROLE
+                + " FROM " + DbHelper.TABLE_EQUIPES + " e"
+                + " JOIN " + DbHelper.TABLE_MEMBRES_EQUIPE + " m ON e." + DbHelper.COL_ID_EQUIPE
+                + " = m." + DbHelper.COL_ID_TEAM
+                + " WHERE m." + DbHelper.COL_ID_USER + " = ?";
+
+        ArrayList<MembreEquipe> resultats = new ArrayList<>();
+        Cursor curseur = db.rawQuery(sql, new String[]{String.valueOf(idUsager)});
+        curseur.moveToFirst();
+        while (!curseur.isAfterLast()) {
+            MembreEquipe me = new MembreEquipe(
+                    curseur.getString(1),
+                    curseur.getString(3),
+                    curseur.getString(2),
+                    curseur.getString(0));
+            resultats.add(me);
             curseur.moveToNext();
         }
         curseur.close();
