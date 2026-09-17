@@ -3,28 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center_horizontal">
+    android:padding="24dp">
 
     <TextView
+        android:id="@+id/tvTitreMesEquipes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Choisissez une équipe à rejoindre"
-        android:textSize="20sp"
-        android:gravity="center" />
-
-    <ListView
-        android:id="@+id/lvEquipes"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:text="Mes Équipes"
+        android:textSize="24sp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp" />
 
+    <ListView
+        android:id="@+id/lvMesEquipes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnRetourMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:onClick="onretour"
         android:text="Retour" />
 
