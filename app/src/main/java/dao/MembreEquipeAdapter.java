@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import modele.MembreEquipe;
 import modele.ParticipantEquipe;
 
 public class MembreEquipeAdapter {
@@ -72,6 +73,32 @@ public class MembreEquipeAdapter {
                     curseur.getString(1),
                     curseur.getString(2));
             resultats.add(p);
+            curseur.moveToNext();
+        }
+        curseur.close();
+        closeBD();
+        return resultats;
+    }
+
+    public ArrayList<MembreEquipe> listerParUsager(long idUsager) {
+        openBD();
+        String sql = "SELECT e." + DbHelper.COL_ID_EQUIPE + ", e." + DbHelper.COL_NOM_EQUIPE
+                + ", e." + DbHelper.COL_SPORT + ", m." + DbHelper.COL_ROLE
+                + " FROM " + DbHelper.TABLE_EQUIPES + " e"
+                + " JOIN " + DbHelper.TABLE_MEMBRES_EQUIPE + " m ON e." + DbHelper.COL_ID_EQUIPE
+                + " = m." + DbHelper.COL_ID_TEAM
+                + " WHERE m." + DbHelper.COL_ID_USER + " = ?";
+
+        ArrayList<MembreEquipe> resultats = new ArrayList<>();
+        Cursor curseur = db.rawQuery(sql, new String[]{String.valueOf(idUsager)});
+        curseur.moveToFirst();
+        while (!curseur.isAfterLast()) {
+            MembreEquipe me = new MembreEquipe(
+                    curseur.getString(1),
+                    curseur.getString(3),
+                    curseur.getString(2),
+                    curseur.getString(0));
+            resultats.add(me);
             curseur.moveToNext();
         }
         curseur.close();

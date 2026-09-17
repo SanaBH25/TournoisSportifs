@@ -23,6 +23,7 @@ public class ChoixEquipeActivity extends AppCompatActivity {
 
         Button btnRejoindre = findViewById(R.id.btnRejoindre);
         Button btnCreer = findViewById(R.id.btnCreer);
+        Button btnMesEquipes = findViewById(R.id.btnMesEquipes);
 
         btnRejoindre.setOnClickListener(v -> {
             Intent intent = new Intent(this, RejoindreEquipeActivity.class);
@@ -32,6 +33,12 @@ public class ChoixEquipeActivity extends AppCompatActivity {
 
         btnCreer.setOnClickListener(v -> {
             Intent intent = new Intent(this, CreerEquipeActivity.class);
+            intent.putExtra(ConnexionActivity.EXTRA_USAGER_ID, usagerId);
+            startActivity(intent);
+        });
+
+        btnMesEquipes.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MesEquipesActivity.class);
             intent.putExtra(ConnexionActivity.EXTRA_USAGER_ID, usagerId);
             startActivity(intent);
         });
