@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import utils.Session;
+
 public class ChoixEquipeActivity extends AppCompatActivity {
 
     @Override
@@ -15,33 +17,22 @@ public class ChoixEquipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choix_equipe);
 
-        long usagerId = getIntent().getLongExtra(ConnexionActivity.EXTRA_USAGER_ID, -1);
-        String prenom = getIntent().getStringExtra(ConnexionActivity.EXTRA_USAGER_PRENOM);
-
+        // Le prénom vient maintenant de la session, plus besoin d'usagerId
         TextView tvBienvenue = findViewById(R.id.tvBienvenue);
-        tvBienvenue.setText("Bienvenue " + prenom + " !");
+        tvBienvenue.setText("Bienvenue " + Session.getPrenom(this) + " !");
 
         Button btnRejoindre = findViewById(R.id.btnRejoindre);
         Button btnCreer = findViewById(R.id.btnCreer);
         Button btnMesEquipes = findViewById(R.id.btnMesEquipes);
 
-        btnRejoindre.setOnClickListener(v -> {
-            Intent intent = new Intent(this, RejoindreEquipeActivity.class);
-            intent.putExtra(ConnexionActivity.EXTRA_USAGER_ID, usagerId);
-            startActivity(intent);
-        });
+        btnRejoindre.setOnClickListener(v ->
+                startActivity(new Intent(this, RejoindreEquipeActivity.class)));
 
-        btnCreer.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CreerEquipeActivity.class);
-            intent.putExtra(ConnexionActivity.EXTRA_USAGER_ID, usagerId);
-            startActivity(intent);
-        });
+        btnCreer.setOnClickListener(v ->
+                startActivity(new Intent(this, CreerEquipeActivity.class)));
 
-        btnMesEquipes.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MesEquipesActivity.class);
-            intent.putExtra(ConnexionActivity.EXTRA_USAGER_ID, usagerId);
-            startActivity(intent);
-        });
+        btnMesEquipes.setOnClickListener(v ->
+                startActivity(new Intent(this, MesEquipesActivity.class)));
     }
 
     public void onquitte(View view) {
