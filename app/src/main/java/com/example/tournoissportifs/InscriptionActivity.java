@@ -10,9 +10,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import dao.UsagerAdapter;
-import modele.Usager;
-import utils.Utilitaire;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Iterator;
+
+import utils.ReponseApi;
+import utils.ServiceApi;
 
 public class InscriptionActivity extends AppCompatActivity {
 
@@ -51,19 +56,63 @@ public class InscriptionActivity extends AppCompatActivity {
             return;
         }
 
-        UsagerAdapter usagerAdapter = new UsagerAdapter(this);
+        try {
+            // 1. Corps JSON : mêmes clés que UserSchema côté Flask
+            JSONObject corps = new JSONObject();
+            corps.put("email", email);
+            corps.put("password", motDePasse);
+            corps.put("nom", nom);
+            corps.put("prenom", prenom);
 
-        if (usagerAdapter.getParEmail(email) != null) {
-            Toast.makeText(this, "Un compte existe déjà avec cet email", Toast.LENGTH_SHORT).show();
-            return;
+            // 2. POST /signup (pas de token)
+            ReponseApi reponse = ServiceApi.post("/signup", corps.toString(), null);
+
+            if (reponse.getCode() == -1) {
+                Toast.makeText(this, "Serveur injoignable", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            JSONObject json = new JSONObject(reponse.getCorps());
+
+            // 3. Erreur 400 : courriel existant OU validation Marshmallow
+            if (!reponse.estSucces()) {
+                Toast.makeText(this, extraireErreur(json), Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            // 4. Succès (201)
+            Toast.makeText(this, "Compte créé, vous pouvez vous connecter",
+                    Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, ConnexionActivity.class));
+            finish();
+
+        } catch (JSONException e) {
+            Toast.makeText(this, "Réponse du serveur invalide", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Transforme la réponse d'erreur de Flask en texte lisible
+    private String extraireErreur(JSONObject json) {
+        // Cas simple : {"message": "Cet email existe déjà"}
+        if (json.has("message")) {
+            return json.optString("message");
         }
 
-        String motDePasseHache = Utilitaire.hacherMotDePasse(motDePasse);
-        Usager usager = new Usager(null, email, null, motDePasseHache, nom, prenom);
-        usagerAdapter.inserer(usager);
+        // Cas validation : {"details": {"password": ["Shorter than..."], ...}}
+        JSONObject details = json.optJSONObject("details");
+        if (details == null) {
+            return "Données invalides";
+        }
 
-        Toast.makeText(this, "Compte créé, vous pouvez vous connecter", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, ConnexionActivity.class));
-        finish();
+        StringBuilder sb = new StringBuilder();
+        Iterator<String> champs = details.keys();
+        while (champs.hasNext()) {
+            String champ = champs.next();
+            JSONArray messages = details.optJSONArray(champ);
+            if (messages != null && messages.length() > 0) {
+                sb.append(champ).append(" : ").append(messages.optString(0)).append("\n");
+            }
+        }
+        return sb.toString().trim();
     }
 }

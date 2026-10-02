@@ -9,21 +9,21 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import dao.EquipeAdapter;
-import dao.MembreEquipeAdapter;
-import modele.Equipe;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import utils.ReponseApi;
+import utils.ServiceApi;
+import utils.Session;
 
 public class CreerEquipeActivity extends AppCompatActivity {
 
-    private long usagerId;
     private EditText etNomEquipe, etSport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creer_equipe);
-
-        usagerId = getIntent().getLongExtra(ConnexionActivity.EXTRA_USAGER_ID, -1);
 
         etNomEquipe = findViewById(R.id.etNomEquipe);
         etSport = findViewById(R.id.etSport);
@@ -41,16 +41,42 @@ public class CreerEquipeActivity extends AppCompatActivity {
             return;
         }
 
-        EquipeAdapter equipeAdapter = new EquipeAdapter(this);
-        MembreEquipeAdapter membreEquipeAdapter = new MembreEquipeAdapter(this);
+        try {
+            JSONObject corps = new JSONObject();
+            corps.put("nom", nom);
+            corps.put("sport", sport);
 
-        Equipe equipe = new Equipe(nom, sport);
-        long idEquipe = equipeAdapter.inserer(equipe);
+            // Route protégée : on envoie le token de la session
+            ReponseApi reponse = ServiceApi.post("/api/teams", corps.toString(),
+                    Session.getToken(this));
 
-        membreEquipeAdapter.inserer(usagerId, idEquipe, "Gérant");
+            if (reponse.getCode() == -1) {
+                Toast.makeText(this, "Serveur injoignable", Toast.LENGTH_LONG).show();
+                return;
+            }
 
-        Toast.makeText(this, "Équipe " + nom + " créée !", Toast.LENGTH_SHORT).show();
-        finish();
+            // Token expiré ou invalide -> retour à la connexion
+            if (reponse.getCode() == 401) {
+                Toast.makeText(this, "Session expirée, reconnectez-vous", Toast.LENGTH_LONG).show();
+                Session.expirer(this);
+                return;
+            }
+
+            JSONObject json = new JSONObject(reponse.getCorps());
+
+            if (!reponse.estSucces()) {
+                Toast.makeText(this, json.optString("message", "Données invalides"),
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Toast.makeText(this, "Équipe " + json.optString("nom") + " créée !",
+                    Toast.LENGTH_SHORT).show();
+            finish();
+
+        } catch (JSONException e) {
+            Toast.makeText(this, "Réponse du serveur invalide", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void onretour(View view) {

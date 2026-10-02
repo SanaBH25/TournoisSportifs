@@ -4,6 +4,7 @@ public class Equipe {
     private String id;
     private String nom;
     private String sport;
+    private boolean estMembre; // false par défaut
 
     public Equipe() {
     }
@@ -43,12 +44,21 @@ public class Equipe {
         this.sport = sport;
     }
 
+    public boolean isEstMembre() {
+        return estMembre;
+    }
+
+    public void setEstMembre(boolean estMembre) {
+        this.estMembre = estMembre;
+    }
+
     @Override
     public String toString() {
         return "Equipe{" +
                 "id='" + id + '\'' +
                 ", nom='" + nom + '\'' +
                 ", sport='" + sport + '\'' +
+                ", estMembre=" + estMembre +
                 '}';
     }
 }
