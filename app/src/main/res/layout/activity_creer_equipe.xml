@@ -7,37 +7,41 @@
     android:gravity="center">
 
     <TextView
+        android:id="@+id/lblTitre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Créer une équipe"
-        android:textSize="24sp"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="24dp"
+        android:text="@string/titre_creer_equipe"
+        android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/etNomEquipe"
+        android:id="@+id/txtNomEquipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nom de l'équipe" />
+        android:hint="@string/hint_nom_equipe"
+        android:inputType="text" />
 
     <EditText
-        android:id="@+id/etSport"
+        android:id="@+id/txtSport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Sport" />
+        android:hint="@string/hint_sport"
+        android:inputType="text" />
 
     <Button
         android:id="@+id/btnCreerEquipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Créer" />
+        android:onClick="creer"
+        android:text="@string/btn_creer_equipe" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnRetour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:onClick="onretour"
-        android:text="Retour" />
+        android:text="@string/btn_retour" />
 
 </LinearLayout>

@@ -4,6 +4,9 @@ public class Equipe {
     private String id;
     private String nom;
     private String sport;
+    private String saison;
+    private boolean dejaInscrit;  // parent : l'enfant choisi est déjà inscrit à cette équipe
+    private int nbInscrits;       // admin : nombre d'enfants inscrits
 
     public Equipe() {
     }
@@ -43,12 +46,39 @@ public class Equipe {
         this.sport = sport;
     }
 
+    public String getSaison() {
+        return saison;
+    }
+
+    public void setSaison(String saison) {
+        this.saison = saison;
+    }
+
+    public boolean isDejaInscrit() {
+        return dejaInscrit;
+    }
+
+    public void setDejaInscrit(boolean dejaInscrit) {
+        this.dejaInscrit = dejaInscrit;
+    }
+
+    public int getNbInscrits() {
+        return nbInscrits;
+    }
+
+    public void setNbInscrits(int nbInscrits) {
+        this.nbInscrits = nbInscrits;
+    }
+
     @Override
     public String toString() {
         return "Equipe{" +
                 "id='" + id + '\'' +
                 ", nom='" + nom + '\'' +
                 ", sport='" + sport + '\'' +
+                ", saison='" + saison + '\'' +
+                ", dejaInscrit=" + dejaInscrit +
+                ", nbInscrits=" + nbInscrits +
                 '}';
     }
 }
