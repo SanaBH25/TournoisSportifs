@@ -3,42 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center">
+    android:padding="24dp">
 
     <TextView
-        android:id="@+id/tvBienvenue"
+        android:id="@+id/lblTitre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:layout_marginBottom="32dp" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btnRejoindre"
+    <ListView
+        android:id="@+id/lvEquipes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rejoindre une équipe" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <Button
-        android:id="@+id/btnCreer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Créer une équipe" />
-
-    <Button
-        android:id="@+id/btnMesEquipes"
+        android:id="@+id/btnRetour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Mes Équipes" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:onClick="onquitte"
-        android:text="Quitter" />
+        android:onClick="onretour"
+        android:text="@string/btn_retour" />
 
 </LinearLayout>

@@ -3,9 +3,8 @@ package com.example.tournoissportifs;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.Button;
+import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,38 +20,29 @@ import utils.ServiceApi;
 
 public class InscriptionActivity extends AppCompatActivity {
 
-    private EditText etPrenom, etNom, etEmail, etMotDePasse;
+    private EditText txtPrenom, txtNom, txtEmail, txtMotDePasse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
 
-        etPrenom = findViewById(R.id.etPrenom);
-        etNom = findViewById(R.id.etNom);
-        etEmail = findViewById(R.id.etEmail);
-        etMotDePasse = findViewById(R.id.etMotDePasse);
-
-        Button btnInscrire = findViewById(R.id.btnInscrire);
-        TextView tvVersConnexion = findViewById(R.id.tvVersConnexion);
-
-        btnInscrire.setOnClickListener(v -> inscrire());
-
-        tvVersConnexion.setOnClickListener(v -> {
-            startActivity(new Intent(this, ConnexionActivity.class));
-            finish();
-        });
+        txtPrenom = findViewById(R.id.txtPrenom);
+        txtNom = findViewById(R.id.txtNom);
+        txtEmail = findViewById(R.id.txtEmail);
+        txtMotDePasse = findViewById(R.id.txtMotDePasse);
     }
 
-    private void inscrire() {
-        String prenom = etPrenom.getText().toString().trim();
-        String nom = etNom.getText().toString().trim();
-        String email = etEmail.getText().toString().trim();
-        String motDePasse = etMotDePasse.getText().toString();
+    // android:onClick="inscrire" (btnInscrire)
+    public void inscrire(View view) {
+        String prenom = txtPrenom.getText().toString().trim();
+        String nom = txtNom.getText().toString().trim();
+        String email = txtEmail.getText().toString().trim();
+        String motDePasse = txtMotDePasse.getText().toString();
 
         if (TextUtils.isEmpty(prenom) || TextUtils.isEmpty(nom)
                 || TextUtils.isEmpty(email) || TextUtils.isEmpty(motDePasse)) {
-            Toast.makeText(this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.msg_champs_vides, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -68,7 +58,7 @@ public class InscriptionActivity extends AppCompatActivity {
             ReponseApi reponse = ServiceApi.post("/signup", corps.toString(), null);
 
             if (reponse.getCode() == -1) {
-                Toast.makeText(this, "Serveur injoignable", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.msg_serveur_injoignable, Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -81,14 +71,19 @@ public class InscriptionActivity extends AppCompatActivity {
             }
 
             // 4. Succès (201)
-            Toast.makeText(this, "Compte créé, vous pouvez vous connecter",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.msg_compte_cree, Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, ConnexionActivity.class));
             finish();
 
         } catch (JSONException e) {
-            Toast.makeText(this, "Réponse du serveur invalide", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.msg_reponse_invalide, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // android:onClick="allerConnexion" (lblVersConnexion)
+    public void allerConnexion(View view) {
+        startActivity(new Intent(this, ConnexionActivity.class));
+        finish();
     }
 
     // Transforme la réponse d'erreur de Flask en texte lisible
@@ -101,7 +96,7 @@ public class InscriptionActivity extends AppCompatActivity {
         // Cas validation : {"details": {"password": ["Shorter than..."], ...}}
         JSONObject details = json.optJSONObject("details");
         if (details == null) {
-            return "Données invalides";
+            return getString(R.string.msg_donnees_invalides);
         }
 
         StringBuilder sb = new StringBuilder();

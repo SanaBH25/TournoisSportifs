@@ -7,24 +7,25 @@
     android:gravity="center">
 
     <TextView
+        android:id="@+id/lblTitre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Connexion"
-        android:textSize="24sp"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="24dp"
+        android:text="@string/titre_connexion"
+        android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/txtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/hint_email"
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/etMotDePasse"
+        android:id="@+id/txtMotDePasse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Mot de passe"
+        android:hint="@string/hint_mot_de_passe"
         android:inputType="textPassword" />
 
     <Button
@@ -32,15 +33,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Se connecter" />
+        android:onClick="connecter"
+        android:text="@string/btn_connexion" />
 
     <TextView
-        android:id="@+id/tvVersInscription"
+        android:id="@+id/lblVersInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Pas de compte ? S'inscrire"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        android:onClick="allerInscription"
+        android:text="@string/lien_vers_inscription" />
 
 </LinearLayout>

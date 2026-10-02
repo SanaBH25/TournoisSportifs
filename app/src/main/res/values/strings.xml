@@ -1,3 +1,94 @@
 <resources>
     <string name="app_name">Tournois Sportifs</string>
+
+    <!-- Connexion -->
+    <string name="titre_connexion">Connexion</string>
+    <string name="hint_email">Courriel</string>
+    <string name="hint_mot_de_passe">Mot de passe</string>
+    <string name="btn_connexion">Se connecter</string>
+    <string name="lien_vers_inscription">Pas de compte ? S\'inscrire</string>
+
+    <!-- Inscription -->
+    <string name="titre_inscription">Inscription</string>
+    <string name="hint_prenom">Prénom</string>
+    <string name="hint_nom">Nom</string>
+    <string name="btn_inscrire">S\'inscrire</string>
+    <string name="lien_vers_connexion">Déjà un compte ? Se connecter</string>
+
+    <!-- Menu (ChoixEquipe) -->
+    <string name="bienvenue">Bienvenue %1$s !</string>
+    <string name="btn_creer">Créer une équipe</string>
+    <string name="btn_deconnexion">Se déconnecter</string>
+    <string name="btn_quitter">Quitter</string>
+
+    <!-- Créer une équipe -->
+    <string name="titre_creer_equipe">Créer une équipe</string>
+    <string name="hint_nom_equipe">Nom de l\'équipe</string>
+    <string name="hint_sport">Sport</string>
+    <string name="btn_creer_equipe">Créer</string>
+    <string name="btn_retour">Retour</string>
+
+    <!-- Listes d'équipes -->
+    <string name="titre_mes_equipes">Équipes que je gère</string>
+    <string name="format_equipe">%1$s (%2$s)</string>
+
+    <!-- Messages (Toast) -->
+    <string name="msg_champs_vides">Veuillez remplir tous les champs</string>
+    <string name="msg_serveur_injoignable">Serveur injoignable</string>
+    <string name="msg_session_expiree">Session expirée, reconnectez-vous</string>
+    <string name="msg_reponse_invalide">Réponse du serveur invalide</string>
+    <string name="msg_erreur_connexion">Erreur de connexion</string>
+    <string name="msg_erreur_code">Erreur %1$d</string>
+    <string name="msg_donnees_invalides">Données invalides</string>
+    <string name="msg_compte_cree">Compte créé, vous pouvez vous connecter</string>
+    <string name="msg_equipe_creee">Équipe %1$s créée !</string>
+    <string name="msg_deconnecte">Vous êtes déconnecté</string>
+
+    <!-- ===== Rôles : menus ===== -->
+    <string name="bienvenue_admin">Bienvenue %1$s (admin)</string>
+    <string name="btn_equipes_gerees">Équipes que je gère</string>
+    <string name="btn_voir_equipes">Voir les équipes</string>
+    <string name="btn_mes_enfants">Mes enfants</string>
+
+    <!-- Admin : modifier / supprimer -->
+    <string name="titre_modifier_equipe">Modifier l\'équipe</string>
+    <string name="hint_saison">Saison (ex. 2026-2027)</string>
+    <string name="btn_enregistrer">Enregistrer</string>
+    <string name="btn_supprimer">Supprimer</string>
+    <string name="btn_annuler">Annuler</string>
+    <string name="titre_confirmer_suppression">Supprimer l\'équipe ?</string>
+    <string name="msg_confirmer_suppression">L\'équipe %1$s et toutes ses inscriptions seront supprimées.</string>
+    <string name="format_equipe_admin">%1$s (%2$s) - %3$d inscrit(s)</string>
+    <string name="msg_aucune_equipe_geree">Vous ne gérez aucune équipe</string>
+    <string name="msg_equipe_modifiee">Équipe modifiée</string>
+    <string name="msg_equipe_supprimee">Équipe supprimée</string>
+
+    <!-- Parent : enfants et inscriptions -->
+    <string name="titre_mes_enfants">Mes enfants</string>
+    <string name="titre_ajouter_enfant">Ajouter un enfant</string>
+    <string name="titre_equipes_enfant">Équipes de %1$s</string>
+    <string name="titre_toutes_equipes">Équipes disponibles</string>
+    <string name="titre_inscrire_enfant">Inscrire %1$s à une équipe</string>
+    <string name="hint_date_naissance">Date de naissance (AAAA-MM-JJ)</string>
+    <string name="btn_ajouter_enfant">Ajouter un enfant</string>
+    <string name="btn_ajouter">Ajouter</string>
+    <string name="btn_inscrire_equipe">Inscrire à une équipe</string>
+    <string name="format_enfant">%1$s %2$s</string>
+    <string name="format_enfant_date">%1$s %2$s (né(e) le %3$s)</string>
+    <string name="format_equipe_inscrit">%1$s (%2$s) ✓ déjà inscrit(e)</string>
+    <string name="msg_aucun_enfant">Aucun enfant. Appuyez sur « Ajouter un enfant ».</string>
+    <string name="msg_enfant_ajoute">%1$s a été ajouté(e)</string>
+    <string name="msg_enfant_aucune_equipe">%1$s n\'est inscrit(e) à aucune équipe</string>
+    <string name="msg_aucune_equipe_disponible">Aucune équipe disponible pour le moment</string>
+    <string name="msg_deja_inscrit">%1$s est déjà inscrit(e) à cette équipe</string>
+
+    <!-- Admin : joueurs d'une équipe -->
+    <string name="btn_voir_joueurs">Joueurs inscrits</string>
+    <string name="titre_joueurs_equipe">Joueurs de %1$s</string>
+    <string name="format_joueur">%1$s %2$s (parent : %3$s)</string>
+    <string name="msg_aucun_joueur">Aucun joueur inscrit pour le moment</string>
+    <string name="titre_retirer_joueur">Retirer le joueur ?</string>
+    <string name="msg_confirmer_retrait">%1$s sera retiré(e) de l\'équipe %2$s.</string>
+    <string name="btn_retirer">Retirer</string>
+    <string name="msg_joueur_retire">Joueur retiré de l\'équipe</string>
 </resources>
