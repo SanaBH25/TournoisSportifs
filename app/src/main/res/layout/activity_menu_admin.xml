@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/lblBienvenue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/btnCreer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="ouvrirCreer"
+        android:text="@string/btn_creer" />
+
+    <Button
+        android:id="@+id/btnMesEquipes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="ouvrirMesEquipes"
+        android:text="@string/btn_equipes_gerees" />
+
+    <Button
+        android:id="@+id/btnDeconnexion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="deconnecter"
+        android:text="@string/btn_deconnexion" />
+
+    <Button
+        android:id="@+id/btnQuitter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="onquitte"
+        android:text="@string/btn_quitter" />
+
+</LinearLayout>
