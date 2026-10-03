@@ -7,38 +7,39 @@
     android:gravity="center">
 
     <TextView
+        android:id="@+id/lblTitre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Inscription"
-        android:textSize="24sp"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="24dp"
+        android:text="@string/titre_inscription"
+        android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/etPrenom"
+        android:id="@+id/txtPrenom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Prénom"
+        android:hint="@string/hint_prenom"
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/etNom"
+        android:id="@+id/txtNom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nom"
+        android:hint="@string/hint_nom"
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/txtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/hint_email"
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/etMotDePasse"
+        android:id="@+id/txtMotDePasse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Mot de passe"
+        android:hint="@string/hint_mot_de_passe"
         android:inputType="textPassword" />
 
     <Button
@@ -46,15 +47,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="S'inscrire" />
+        android:onClick="inscrire"
+        android:text="@string/btn_inscrire" />
 
     <TextView
-        android:id="@+id/tvVersConnexion"
+        android:id="@+id/lblVersConnexion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Déjà un compte ? Se connecter"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        android:onClick="allerConnexion"
+        android:text="@string/lien_vers_connexion" />
 
 </LinearLayout>

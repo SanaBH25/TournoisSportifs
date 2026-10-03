@@ -4,7 +4,9 @@ public class Equipe {
     private String id;
     private String nom;
     private String sport;
-    private boolean estMembre; // false par défaut
+    private String saison;
+    private boolean dejaInscrit;  // parent : l'enfant choisi est déjà inscrit à cette équipe
+    private int nbInscrits;       // admin : nombre d'enfants inscrits
 
     public Equipe() {
     }
@@ -44,12 +46,28 @@ public class Equipe {
         this.sport = sport;
     }
 
-    public boolean isEstMembre() {
-        return estMembre;
+    public String getSaison() {
+        return saison;
     }
 
-    public void setEstMembre(boolean estMembre) {
-        this.estMembre = estMembre;
+    public void setSaison(String saison) {
+        this.saison = saison;
+    }
+
+    public boolean isDejaInscrit() {
+        return dejaInscrit;
+    }
+
+    public void setDejaInscrit(boolean dejaInscrit) {
+        this.dejaInscrit = dejaInscrit;
+    }
+
+    public int getNbInscrits() {
+        return nbInscrits;
+    }
+
+    public void setNbInscrits(int nbInscrits) {
+        this.nbInscrits = nbInscrits;
     }
 
     @Override
@@ -58,7 +76,9 @@ public class Equipe {
                 "id='" + id + '\'' +
                 ", nom='" + nom + '\'' +
                 ", sport='" + sport + '\'' +
-                ", estMembre=" + estMembre +
+                ", saison='" + saison + '\'' +
+                ", dejaInscrit=" + dejaInscrit +
+                ", nbInscrits=" + nbInscrits +
                 '}';
     }
 }

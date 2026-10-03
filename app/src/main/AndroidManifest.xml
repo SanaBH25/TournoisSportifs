@@ -39,16 +39,41 @@
             android:exported="false" />
 
         <activity
-            android:name=".RejoindreEquipeActivity"
-            android:exported="false" />
-
-        <activity
             android:name=".CreerEquipeActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".MesEquipesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuAdminActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MenuParentActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ModifierEquipeActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".MesEnfantsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AjouterEnfantActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".EquipesEnfantActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".JoueursEquipeActivity"
             android:exported="false" />
     </application>
 

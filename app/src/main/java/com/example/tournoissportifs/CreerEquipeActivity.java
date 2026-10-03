@@ -3,7 +3,6 @@ package com.example.tournoissportifs;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,26 +17,24 @@ import utils.Session;
 
 public class CreerEquipeActivity extends AppCompatActivity {
 
-    private EditText etNomEquipe, etSport;
+    private EditText txtNomEquipe, txtSport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creer_equipe);
 
-        etNomEquipe = findViewById(R.id.etNomEquipe);
-        etSport = findViewById(R.id.etSport);
-        Button btnCreerEquipe = findViewById(R.id.btnCreerEquipe);
-
-        btnCreerEquipe.setOnClickListener(v -> creer());
+        txtNomEquipe = findViewById(R.id.txtNomEquipe);
+        txtSport = findViewById(R.id.txtSport);
     }
 
-    private void creer() {
-        String nom = etNomEquipe.getText().toString().trim();
-        String sport = etSport.getText().toString().trim();
+    // android:onClick="creer" (btnCreerEquipe)
+    public void creer(View view) {
+        String nom = txtNomEquipe.getText().toString().trim();
+        String sport = txtSport.getText().toString().trim();
 
         if (TextUtils.isEmpty(nom) || TextUtils.isEmpty(sport)) {
-            Toast.makeText(this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.msg_champs_vides, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -51,13 +48,13 @@ public class CreerEquipeActivity extends AppCompatActivity {
                     Session.getToken(this));
 
             if (reponse.getCode() == -1) {
-                Toast.makeText(this, "Serveur injoignable", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.msg_serveur_injoignable, Toast.LENGTH_LONG).show();
                 return;
             }
 
             // Token expiré ou invalide -> retour à la connexion
             if (reponse.getCode() == 401) {
-                Toast.makeText(this, "Session expirée, reconnectez-vous", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.msg_session_expiree, Toast.LENGTH_LONG).show();
                 Session.expirer(this);
                 return;
             }
@@ -65,20 +62,22 @@ public class CreerEquipeActivity extends AppCompatActivity {
             JSONObject json = new JSONObject(reponse.getCorps());
 
             if (!reponse.estSucces()) {
-                Toast.makeText(this, json.optString("message", "Données invalides"),
+                Toast.makeText(this,
+                        json.optString("message", getString(R.string.msg_donnees_invalides)),
                         Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            Toast.makeText(this, "Équipe " + json.optString("nom") + " créée !",
+            Toast.makeText(this, getString(R.string.msg_equipe_creee, json.optString("nom")),
                     Toast.LENGTH_SHORT).show();
             finish();
 
         } catch (JSONException e) {
-            Toast.makeText(this, "Réponse du serveur invalide", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.msg_reponse_invalide, Toast.LENGTH_SHORT).show();
         }
     }
 
+    // android:onClick="onretour" (btnRetour)
     public void onretour(View view) {
         finish();
     }

@@ -33,6 +33,14 @@ public class ServiceApi {
         return executer("POST", chemin, corpsJson, token);
     }
 
+    public static ReponseApi put(String chemin, String corpsJson, String token) {
+        return executer("PUT", chemin, corpsJson, token);
+    }
+
+    public static ReponseApi delete(String chemin, String token) {
+        return executer("DELETE", chemin, null, token);
+    }
+
     // ============================================================
     // Méthode centrale — fait le vrai travail réseau
     // ============================================================
